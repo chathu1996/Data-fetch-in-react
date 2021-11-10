@@ -1,21 +1,33 @@
-  import './App.css';
+import axios from "axios"
+import { useState } from "react"
+import './App.css';
 
 
 function App() {
-  // arrays of objects
-  const myArray = [
-    {name: "Silva", age: 32},
-    {name: "Kamal", age: 30},
-    {name: "Perera", age: 18},
-    {name: "Chamara", age: 21},
-  ];
 
-  return (
+  const [users, setUsers] = useState([]);   
+
+  async function handleClick() {
+    const result = await axios.get("https://jsonplaceholder.typicode.com/users");
+    setUsers(result.data);
+    console.log(result.data);
+  }
+
+  return ( 
     <div className="App">
-      <h1>Hello</h1>
-      { myArray.map(function mapFunction(item) {
-           return <h1>{ item.name }, { item.age }</h1>;
-      })}
+      <h1>Users List</h1> 
+      <button onClick = { handleClick }>Get Users</button>
+      <div className="list">
+        {users.map( function fn(item){
+          return (
+            <div className="list-item">
+              <div>{item.id}</div>
+              <div className="user-name">{item.name}</div>
+            </div>
+          )
+        })}
+      </div>
+      
     </div>
   );
 }
