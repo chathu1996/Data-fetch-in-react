@@ -18,7 +18,7 @@ function App() {
       <h1>Users List</h1> 
       <button onClick = { handleClick }>Get Users</button>
       <div className="list">
-        {users.map( function fn(item){
+        {users.map( (item) => {
           return (
             <div className="list-item">
               <div>{item.id}</div>
